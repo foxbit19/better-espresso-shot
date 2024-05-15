@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react'
 import { title } from './primitives'
 import EspressoChallengeResponse from './espressoChallengeResponse'
 import EspressoInput from './espressoInput'
+import ShareBar from './shareBar'
 
 interface Props {
     dose: number
@@ -24,6 +25,9 @@ const EspressoResults = (props: Props) => {
                 <></>
             )}
             <h1 className={title()}>Your ratio is<br /><span className={title({ color: 'yellow' })}>{ratio}</span></h1>
+
+            <ShareBar />
+
         </div>
     )
 }
