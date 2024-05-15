@@ -9,7 +9,6 @@ import { Status } from '@/app/status';
 import EspressoInput from './espressoInput';
 
 interface Props {
-    dose: number
 }
 
 const EspressoMaker = (props: Props) => {
