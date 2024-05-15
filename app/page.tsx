@@ -1,10 +1,7 @@
 "use client";
 
 import { title } from "@/components/primitives";
-import { Input } from "@nextui-org/input";
 import EspressoMaker from "@/components/espressoMaker";
-import EspressoInput from "@/components/espressoInput";
-import { useState } from "react";
 
 export default function Home() {
 	return (
@@ -16,7 +13,7 @@ export default function Home() {
 					perfect espresso shot&nbsp;
 				</h1>
 				<br />
-				<h1 className={title()}>using tech.</h1>
+				<h1 className={title()}>and get your ratio.</h1>
 			</div>
 
 			<div className="flex flex-col gap-4">

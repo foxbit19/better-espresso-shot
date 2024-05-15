@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import { Analytics } from "@vercel/analytics/react"
+import { FaHeart } from "react-icons/fa";
 
 export const metadata: Metadata = {
 	title: {
@@ -45,15 +46,15 @@ export default function RootLayout({
 						<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
 							{children}
 						</main>
-						<footer className="w-full flex items-center justify-center py-3">
+						<footer className="w-full flex flex-row items-center justify-center py-3">
 							<Link
 								isExternal
 								className="flex items-center gap-1 text-current"
-								href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"
-								title="nextui.org homepage"
+								href="https://github.com/foxbit19"
+								title="foxbit19's github profile"
 							>
-								<span className="text-default-600">Powered by</span>
-								<p className="text-primary">NextUI</p>
+								Made by
+								<p className="text-primary">foxbit19</p>
 							</Link>
 						</footer>
 					</div>

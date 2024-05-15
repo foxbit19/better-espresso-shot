@@ -2,6 +2,7 @@ import { Input } from '@nextui-org/input'
 import React, { ChangeEvent, KeyboardEventHandler } from 'react'
 
 interface Props {
+    value?: string
     label: string
     onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
@@ -15,6 +16,8 @@ const EspressoInput = (props: Props) => {
 
     return (
         <Input
+            className='flex-1'
+            value={props.value}
             label={props.label}
             onChange={props.onChange}
             onKeyDown={handleKeyDown}

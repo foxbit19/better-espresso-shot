@@ -1,35 +1,35 @@
 "use client";
 
-import { Button } from '@nextui-org/button'
-import React, { useEffect, useRef, useState } from 'react'
+import { Button } from "@nextui-org/button";
+import React, { useEffect, useRef, useState } from "react";
 import { button as buttonStyles } from "@nextui-org/theme";
-import EspressoResults from './espressoResults';
-import { title } from './primitives';
-import { Status } from '@/app/status';
-import EspressoInput from './espressoInput';
+import EspressoResults from "./espressoResults";
+import { title } from "./primitives";
+import EspressoInput from "./espressoInput";
+import { Status } from "@/types/status";
+import { FaCoffee } from "react-icons/fa";
 
-interface Props {
-}
+interface Props { }
 
 const EspressoMaker = (props: Props) => {
-    const [counter, setCounter] = useState(0)
+    const [counter, setCounter] = useState(0);
     const [pullStatus, setPullStatus] = useState(Status.NO_PULL);
-    const timerRef = useRef<NodeJS.Timeout>()
+    const timerRef = useRef<NodeJS.Timeout>();
     const [coffeeResults, setCoffeeResults] = useState("");
-    const [dose, setDose] = useState(0)
+    const [dose, setDose] = useState(0);
 
     const handleStop = () => {
-        clearTimeout(timerRef.current)
+        clearTimeout(timerRef.current);
         setCounter(0);
         setPullStatus(Status.PULLED);
         setCoffeeResults(
             `Espresso was made in ${counter} seconds. How does it taste?`
         );
-    }
+    };
 
     const handleStart = () => {
         setPullStatus(Status.PULLING);
-    }
+    };
 
     useEffect(() => {
         if (pullStatus !== Status.PULLING) {
@@ -37,40 +37,59 @@ const EspressoMaker = (props: Props) => {
         }
 
         const timer = setInterval(() => {
-            setCounter(counter => counter + 1)
-        }, 1000)
+            setCounter((counter) => counter + 1);
+        }, 1000);
 
         return () => clearInterval(timer);
     }, [pullStatus]);
 
     return (
-        <div className='flex flex-col gap-4'>
-            <EspressoInput label="Your dose" onChange={(event) => setDose(+event.currentTarget.value)} />
+        <div className="flex flex-col gap-4">
             {pullStatus !== Status.PULLING ? (
-                <div>
+                <div className="flex flex-row gap-3 align-middle justify-center">
+                    <EspressoInput
+                        label="Your dose"
+                        value={dose.toString()}
+                        onChange={(event) => setDose(+event.currentTarget.value)}
+                    />
                     <Button
                         onClick={handleStart}
+                        isIconOnly
                         className={buttonStyles({
                             color: "primary",
-                            radius: "full",
-                            variant: "shadow",
+                            radius: "md",
+                            size: "lg",
                         })}
-                    >
-                        Make espresso
-                    </Button>
+                        startContent={<FaCoffee size={25} />}
+                    ></Button>
                 </div>
             ) : (
-                <div className='flex flex-col gap-4'>
-                    <h1 className={title()}>Pulling the shot </h1><br />
-                    <h1 className={title()}> in <span className={title({ color: 'yellow' })}>{counter}</span> seconds.</h1><br />
-                    <Button onClick={handleStop}
-                        className={buttonStyles({ color: "primary", radius: "full", variant: "shadow" })}>
+                <div className="flex flex-col gap-4">
+                    <h2>
+                        Pulling the shot in{" "}
+                        <span className={title({ color: "yellow" })}>{counter}</span>{" "}
+                        seconds.
+                    </h2>
+                    <br />
+                    <Button
+                        onClick={handleStop}
+                        className={buttonStyles({
+                            color: "primary",
+                            radius: "md",
+                            size: 'lg'
+                        })}
+                    >
                         Stop
                     </Button>
-                </div>)}
-            {pullStatus === Status.PULLED ? <EspressoResults dose={dose} results={coffeeResults} /> : <></>}
+                </div>
+            )}
+            {pullStatus === Status.PULLED ? (
+                <EspressoResults dose={dose} results={coffeeResults} />
+            ) : (
+                <></>
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default EspressoMaker
+export default EspressoMaker;
