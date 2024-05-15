@@ -3,6 +3,8 @@
 import { title } from "@/components/primitives";
 import { Input } from "@nextui-org/input";
 import EspressoMaker from "@/components/espressoMaker";
+import EspressoInput from "@/components/espressoInput";
+import { useState } from "react";
 
 export default function Home() {
 	return (
@@ -18,17 +20,6 @@ export default function Home() {
 			</div>
 
 			<div className="flex flex-col gap-4">
-				<Input
-					label="Your dose"
-					type="number"
-					placeholder="0"
-					required
-					endContent={
-						<div className="pointer-events-none flex items-center">
-							<span className="text-default-400 text-small">grams</span>
-						</div>
-					}
-				/>
 				<EspressoMaker />
 			</div>
 		</section>
