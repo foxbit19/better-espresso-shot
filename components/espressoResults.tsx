@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
 import { title } from "./primitives";
-import EspressoChallengeResponse from "./espressoChallengeResponse";
 import EspressoInput from "./espressoInput";
 import ShareBar from "./shareBar";
 

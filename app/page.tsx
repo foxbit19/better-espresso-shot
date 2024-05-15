@@ -3,7 +3,7 @@
 import { title } from "@/components/primitives";
 import EspressoMaker from "@/components/espressoMaker";
 import Lottie from 'react-lottie';
-import animation from './espresso.json'
+import animation from './lottie/espresso.json'
 
 export default function Home() {
 	const defaultOptions = {

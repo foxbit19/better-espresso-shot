@@ -8,6 +8,8 @@ import { title } from "./primitives";
 import EspressoInput from "./espressoInput";
 import { Status } from "@/types/status";
 import { FaCoffee } from "react-icons/fa";
+import animation from '../app/lottie/beans.json'
+import Lottie from "react-lottie";
 
 interface Props { }
 
@@ -17,6 +19,15 @@ const EspressoMaker = (props: Props) => {
     const timerRef = useRef<NodeJS.Timeout>();
     const [coffeeResults, setCoffeeResults] = useState("");
     const [dose, setDose] = useState(0);
+
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animation,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
 
     const handleStop = () => {
         clearTimeout(timerRef.current);
@@ -64,11 +75,14 @@ const EspressoMaker = (props: Props) => {
                     ></Button>
                 </div>
             ) : (
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col align-middle text-center gap-4">
+                    Making espresso...
+                    <Lottie options={defaultOptions}
+                        height={100}
+                        width={200} />
                     <h2>
-                        Pulling the shot in{" "}
                         <span className={title({ color: "yellow" })}>{counter}</span>{" "}
-                        seconds.
+                        seconds
                     </h2>
                     <br />
                     <Button
