@@ -3,7 +3,6 @@ import React from 'react'
 import { FacebookShare, RedditShare, TwitterShare, } from 'react-share-kit';
 
 interface Props {
-    message: string
 }
 
 const ShareBar = (props: Props) => {
