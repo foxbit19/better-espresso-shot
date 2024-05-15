@@ -19,7 +19,7 @@ export default function Home() {
 		<section className="flex flex-col items-center justify-center gap-5 md:py-1">
 			<Lottie options={defaultOptions}
 				height={300}
-				width={400} />
+				width={300} />
 			<div className="inline-block max-w-lg text-center justify-center">
 				<h1 className={title()}>Pull the&nbsp;</h1>
 				<br />
