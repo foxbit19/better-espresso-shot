@@ -1,11 +1,14 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import { title } from "./primitives";
 import EspressoInput from "./espressoInput";
 import ShareBar from "./shareBar";
 import { Indie_Flower } from 'next/font/google'
 import arrow from '../app/png/arrow.png'
 import Image from "next/image";
-import { card as cardStyles } from "@nextui-org/theme";
+import { Button } from "@nextui-org/button";
+import { FaSave } from "react-icons/fa";
+import { button as buttonStyles } from "@nextui-org/theme";
+import { RatioResult } from "@/types/ratioResult";
 
 interface Props {
     dose: number;
@@ -19,11 +22,28 @@ const indieFlower = Indie_Flower({
 
 const EspressoResults = (props: Props) => {
     const [ratio, setRatio] = useState("1:1");
+    const [saved, setSaved] = useState(false)
+    const output = useRef<number>(0)
 
     const handleOutputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const currentRatio = (1 / props.dose) * +event.currentTarget.value;
+        output.current = +event.currentTarget.value
+        const currentRatio = (1 / props.dose) * output.current;
         setRatio(`1:${Math.round(currentRatio * 100) / 100}`);
     };
+
+    const handleSave = () => {
+        const ratios: RatioResult[] = JSON.parse(localStorage.getItem('coffeRatios')!) ?? []
+
+        ratios.push({
+            date: new Date(),
+            input: props.dose,
+            output: output.current,
+            ratio: ratio
+        })
+
+        localStorage.setItem('coffeRatios', JSON.stringify(ratios))
+        setSaved(true);
+    }
 
     return (
         <div className="flex flex-col gap-3 text-center">
@@ -43,6 +63,16 @@ const EspressoResults = (props: Props) => {
                 <br />
                 <span className={title({ color: "yellow" })}>{ratio}</span>
             </h1>
+            <Button
+                onClick={handleSave}
+                disabled={saved}
+                className={buttonStyles({
+                    color: "primary",
+                    radius: "md",
+                    size: "lg",
+                })}
+                startContent={<FaSave size={25} />}
+            >Save</Button>
 
             <ShareBar />
         </div>
