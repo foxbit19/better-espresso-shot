@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@nextui-org/button";
+import { Tooltip } from "@nextui-org/tooltip";
 import React, { useEffect, useRef, useState } from "react";
 import { button as buttonStyles } from "@nextui-org/theme";
 import EspressoResults from "./espressoResults";
@@ -63,16 +64,18 @@ const EspressoMaker = (props: Props) => {
                         value={dose.toString()}
                         onChange={(event) => setDose(+event.currentTarget.value)}
                     />
-                    <Button
-                        onClick={handleStart}
-                        isIconOnly
-                        className={buttonStyles({
-                            color: "primary",
-                            radius: "md",
-                            size: "lg",
-                        })}
-                        startContent={<FaCoffee size={25} />}
-                    ></Button>
+                    <Tooltip content="Click this button to start the coffee timer">
+                        <Button
+                            onClick={handleStart}
+                            isIconOnly
+                            className={buttonStyles({
+                                color: "primary",
+                                radius: "md",
+                                size: "lg",
+                            })}
+                            startContent={<FaCoffee size={25} />}
+                        ></Button>
+                    </Tooltip>
                 </div>
             ) : (
                 <div className="flex flex-col align-middle text-center gap-4">
