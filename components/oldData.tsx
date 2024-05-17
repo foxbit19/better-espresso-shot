@@ -24,23 +24,13 @@ const columns = [
         allowSorting: true
     },
     {
-        key: "input",
-        label: "Dose",
-        allowSorting: true
-    },
-    {
-        key: "output",
-        label: "Output",
-        allowSorting: true
-    },
-    {
         key: "ratio",
         label: "Ratio",
         allowSorting: true
     },
     {
         key: "seconds",
-        label: "Seconds",
+        label: "Time",
         allowSorting: true
     },
     {
@@ -59,16 +49,17 @@ const OldData = (props: {}) => {
     const handleCell = (ratio: RatioResult, columnKey: Key) => {
         switch (columnKey) {
             case 'date':
-                return dayjs(ratio.date).format('L LT')
-            case 'input':
-            case 'output':
-                return `${ratio[columnKey]} gr`
+                return <span className="text-xs">{dayjs(ratio.date).format('L')}</span>
             case 'actions':
                 return <Button onClick={() => handleDelete(ratio.id)} isIconOnly size="sm"><FaTrash /></Button>
             case 'seconds':
-                return `${ratio.seconds} s`
+                return <span className="text-xs">{`${ratio.seconds} s`}</span>
             case 'ratio':
-                return <span className="text-coffee-cream font-bold">{ratio.ratio}</span>
+                return <div className="flex flex-col gap-1">
+                    <span className="text-xs">In: {`${ratio.input} gr`}</span>
+                    <span className="text-xs">Out: {`${ratio.output} gr`}</span>
+                    <span className="text-coffee-cream font-bold">{ratio.ratio}</span>
+                </div>
         }
     }
 
