@@ -21,13 +21,15 @@ export default function Home() {
 				height={300}
 				width={300} />
 			<div className="inline-block max-w-lg text-center justify-center">
-				<h1 className={title()}>Pull the&nbsp;</h1>
+				<h1 className={title()}>Improve your&nbsp;</h1>
 				<br />
 				<h1 className={title({ color: "foreground" })}>
-					perfect espresso shot&nbsp;
+					coffee experience&nbsp;
 				</h1>
 				<br />
-				<h1 className={title()}>and get your ratio.</h1>
+				<h1 className={title()}>
+					using ratio analysis&nbsp;
+				</h1>
 			</div>
 
 			<div className="flex flex-col gap-4 py-10">
