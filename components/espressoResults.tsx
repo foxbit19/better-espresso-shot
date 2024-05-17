@@ -1,26 +1,17 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import { title } from "./primitives";
 import EspressoInput from "./espressoInput";
-import ShareBar from "./shareBar";
-import { Indie_Flower } from 'next/font/google'
-import arrow from '../app/png/arrow.png'
-import Image from "next/image";
 import { Button } from "@nextui-org/button";
 import { FaSave } from "react-icons/fa";
 import { button as buttonStyles } from "@nextui-org/theme";
-import { RatioResult } from "@/types/ratioResult";
 import RatioProvider from "@/app/providers/provider";
+import Tips from "./tips";
 
 interface Props {
     dose: number;
     results: string;
     seconds: number
 }
-
-const indieFlower = Indie_Flower({
-    weight: '400',
-    subsets: ['latin']
-})
 
 const EspressoResults = (props: Props) => {
     const [ratio, setRatio] = useState("1:1");
@@ -51,8 +42,7 @@ const EspressoResults = (props: Props) => {
             {props.results.length > 0 ? (
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-3 justify-end">
-                        <p className={`self-end ${indieFlower.className} text-coffee-cream self-baseline`}>Add your cup output</p>
-                        <Image src={arrow} alt="arrow-down" width={30} className="mt-3" />
+                        <Tips text='Add your cup output' />
                     </div>
                     <EspressoInput label="Your output" onChange={handleOutputChange} />
                 </div>
