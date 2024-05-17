@@ -6,8 +6,7 @@ import { Providers } from "./providers";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import { Analytics } from "@vercel/analytics/react"
-import { FaHeart } from "react-icons/fa";
-
+import { ForkMe } from '@mayank1513/fork-me/server'
 export const metadata: Metadata = {
 	title: {
 		default: siteConfig.name,
@@ -41,6 +40,7 @@ export default function RootLayout({
 				)}
 			>
 				<Analytics />
+				<ForkMe noAutoFork bgColor="#E4C59E" gitHubUrl="https://github.com/foxbit19/better-espresso-shot" />
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<div className="relative flex flex-col h-screen">
 						<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
