@@ -9,10 +9,12 @@ import { Button } from "@nextui-org/button";
 import { FaSave } from "react-icons/fa";
 import { button as buttonStyles } from "@nextui-org/theme";
 import { RatioResult } from "@/types/ratioResult";
+import RatioProvider from "@/app/providers/provider";
 
 interface Props {
     dose: number;
     results: string;
+    seconds: number
 }
 
 const indieFlower = Indie_Flower({
@@ -32,16 +34,15 @@ const EspressoResults = (props: Props) => {
     };
 
     const handleSave = () => {
-        const ratios: RatioResult[] = JSON.parse(localStorage.getItem('coffeRatios')!) ?? []
-
-        ratios.push({
+        new RatioProvider().add({
+            id: crypto.randomUUID(),
             date: new Date(),
             input: props.dose,
             output: output.current,
-            ratio: ratio
+            ratio: ratio,
+            seconds: props.seconds
         })
 
-        localStorage.setItem('coffeRatios', JSON.stringify(ratios))
         setSaved(true);
     }
 
@@ -73,8 +74,6 @@ const EspressoResults = (props: Props) => {
                 })}
                 startContent={<FaSave size={25} />}
             >Save</Button>
-
-            <ShareBar />
         </div>
     );
 };

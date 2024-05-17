@@ -16,6 +16,7 @@ interface Props { }
 
 const EspressoMaker = (props: Props) => {
     const [counter, setCounter] = useState(0);
+    const [seconds, setSeconds] = useState(0);
     const [pullStatus, setPullStatus] = useState(Status.NO_PULL);
     const timerRef = useRef<NodeJS.Timeout>();
     const [coffeeResults, setCoffeeResults] = useState("");
@@ -32,6 +33,7 @@ const EspressoMaker = (props: Props) => {
 
     const handleStop = () => {
         clearTimeout(timerRef.current);
+        setSeconds(counter);
         setCounter(0);
         setPullStatus(Status.PULLED);
         setCoffeeResults(
@@ -101,7 +103,7 @@ const EspressoMaker = (props: Props) => {
                 </div>
             )}
             {pullStatus === Status.PULLED ? (
-                <EspressoResults dose={dose} results={coffeeResults} />
+                <EspressoResults dose={dose} results={coffeeResults} seconds={seconds} />
             ) : (
                 <></>
             )}

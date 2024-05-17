@@ -4,6 +4,8 @@ import { title } from "@/components/primitives";
 import EspressoMaker from "@/components/espressoMaker";
 import Lottie from 'react-lottie';
 import animation from './lottie/espresso.json'
+import OldData from "@/components/oldData";
+import ShareBar from "@/components/shareBar";
 
 export default function Home() {
 	const defaultOptions = {
@@ -32,8 +34,10 @@ export default function Home() {
 				</h1>
 			</div>
 
-			<div className="flex flex-col gap-4 py-10">
+			<div className="flex flex-col gap-5 py-10">
 				<EspressoMaker />
+				<OldData />
+				<ShareBar />
 			</div>
 		</section>
 	);
