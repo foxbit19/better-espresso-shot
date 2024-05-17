@@ -48,7 +48,7 @@ const columns = [
     },
 ];
 
-const OldData = () => {
+const OldData = (props: {}) => {
     const [rows, setRows] = useState<RatioResult[]>([]);
 
     const handleDelete = (id: string) => {
@@ -64,8 +64,10 @@ const OldData = () => {
                 return `${ratio[columnKey]} gr`
             case 'actions':
                 return <Button onClick={() => handleDelete(ratio.id)} isIconOnly size="sm"><FaTrash /></Button>
-            default:
-                return ratio[columnKey];
+            case 'seconds':
+                return `${ratio.seconds} s`
+            case 'ratio':
+                return <span className="text-coffee-cream font-bold">{ratio.ratio}</span>
         }
     }
 
