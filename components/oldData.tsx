@@ -6,10 +6,12 @@ import {
     TableBody,
     TableRow,
     TableCell,
+    Button,
 } from "@nextui-org/react";
 import RatioProvider from "@/app/providers/provider";
 import { RatioResult } from "@/types/ratioResult";
 import dayjs from "dayjs";
+import { FaTrash } from "react-icons/fa";
 
 var localizedFormat = require('dayjs/plugin/localizedFormat')
 dayjs.extend(localizedFormat)
@@ -40,10 +42,18 @@ const columns = [
         label: "Seconds",
         allowSorting: true
     },
+    {
+        key: "actions",
+        label: "",
+    },
 ];
 
 const OldData = () => {
     const [rows, setRows] = useState<RatioResult[]>([]);
+
+    const handleDelete = (id: string) => {
+        new RatioProvider().delete(id)
+    }
 
     const handleCell = (ratio: RatioResult, columnKey: Key) => {
         switch (columnKey) {
@@ -52,6 +62,8 @@ const OldData = () => {
             case 'input':
             case 'output':
                 return `${ratio[columnKey]} gr`
+            case 'actions':
+                return <Button onClick={() => handleDelete(ratio.id)} isIconOnly size="sm"><FaTrash /></Button>
             default:
                 return ratio[columnKey];
         }

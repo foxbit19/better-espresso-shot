@@ -10,15 +10,16 @@ export default class RatioProvider {
 
     private parseData() {
         for (const ratio of this.getAll()) {
-            ratio.id = crypto.randomUUID()
+            ratio.id = crypto.randomUUID();
         }
     }
 
     public getAll(): RatioResult[] {
-        if (typeof window !== 'undefined') {
-            return JSON.parse(localStorage.getItem(this.storageName)!) ?? []
+        if (typeof window !== "undefined") {
+            const ratios: RatioResult[] = JSON.parse(localStorage.getItem(this.storageName)!) ?? [];
+            return ratios.sort((ratioA, ratioB) => ratioA.date > ratioB.date ? 0 : 1)
         } else {
-            return []
+            return [];
         }
     }
 
@@ -28,8 +29,20 @@ export default class RatioProvider {
         this.save(ratios);
     }
 
+    public delete(id: string) {
+        const ratios = this.getAll();
+        const index = ratios.findIndex((ratio) => ratio.id === id);
+        ratios.splice(index, 1)
+        this.save(ratios);
+        this.launchUpdateEvent()
+    }
+
     private save(ratios: RatioResult[]) {
         localStorage.setItem(this.storageName, JSON.stringify(ratios));
+        this.launchUpdateEvent()
+    }
+
+    private launchUpdateEvent() {
         window.dispatchEvent(new Event("storageUpdate"));
     }
 }
