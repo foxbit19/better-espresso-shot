@@ -9,7 +9,7 @@ interface Props {
 
 const EspressoInput = (props: Props) => {
     const handleKeyDown = (event: any) => {
-        if (!/[0-9]/.test(event.key) && !['Tab', 'Backspace', 'Delete', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+        if (!/[0-9]/.test(event.key) && !['Tab', 'Backspace', 'Delete', 'ArrowUp', 'ArrowDown', '.'].includes(event.key)) {
             event.preventDefault();
         }
     }

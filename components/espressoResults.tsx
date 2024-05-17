@@ -44,7 +44,7 @@ const EspressoResults = (props: Props) => {
                     <div className="flex flex-row gap-3 justify-end">
                         <Tips text='Add your cup output' />
                     </div>
-                    <EspressoInput label="Your output" onChange={handleOutputChange} />
+                    <EspressoInput label="Your output" value={output.current.toString()} onChange={handleOutputChange} />
                 </div>
             ) : (
                 <></>
