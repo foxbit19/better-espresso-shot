@@ -70,11 +70,11 @@ const EspressoMaker = (props: Props) => {
                         <Button
                             onClick={handleStart}
                             isIconOnly
-                            className={buttonStyles({
+                            className={`${buttonStyles({
                                 color: "primary",
                                 radius: "md",
                                 size: "lg",
-                            })}
+                            })} h-14`}
                             startContent={<FaCoffee size={25} />}
                         ></Button>
                     </Tooltip>
