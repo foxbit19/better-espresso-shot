@@ -12,6 +12,7 @@ import RatioProvider from "@/app/providers/provider";
 import { RatioResult } from "@/types/ratioResult";
 import dayjs from "dayjs";
 import { FaTrash } from "react-icons/fa";
+import Tips from "./tips";
 
 var localizedFormat = require('dayjs/plugin/localizedFormat')
 dayjs.extend(localizedFormat)
@@ -82,8 +83,8 @@ const OldData = (props: {}) => {
     }, []);
 
     return (
-        <>
-            <h1>Your old data</h1>
+        <div className={rows.length > 0 ? '' : 'hidden'}>
+            <Tips text="Your old data" left />
             <Table isStriped>
                 <TableHeader columns={columns}>
                     {(column) => (
@@ -100,7 +101,7 @@ const OldData = (props: {}) => {
                     )}
                 </TableBody>
             </Table>
-        </>
+        </div>
     );
 };
 
