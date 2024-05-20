@@ -11,6 +11,7 @@ import { Status } from "@/types/status";
 import { FaCoffee } from "react-icons/fa";
 import animation from '../app/lottie/beans.json'
 import Lottie from "react-lottie";
+import CoffeeMeter from "./coffeeMeter";
 
 interface Props { }
 
@@ -81,15 +82,7 @@ const EspressoMaker = (props: Props) => {
                 </div>
             ) : (
                 <div className="flex flex-col align-middle text-center gap-4">
-                    Making espresso...
-                    <Lottie options={defaultOptions}
-                        height={100}
-                        width={200} />
-                    <h2>
-                        <span className={title({ color: "yellow" })}>{counter}</span>{" "}
-                        seconds
-                    </h2>
-                    <br />
+                    <CoffeeMeter seconds={counter} />
                     <Button
                         onClick={handleStop}
                         className={buttonStyles({

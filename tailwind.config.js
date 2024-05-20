@@ -11,6 +11,9 @@ module.exports = {
     extend: {
       colors: {
         "coffee-cream": "#E4C59E",
+        "coffee-under-extracted": "#e4cfb5",
+        "coffee-over-extracted": "#181319",
+        "coffee-espresso": "#966233",
       },
     },
   },
