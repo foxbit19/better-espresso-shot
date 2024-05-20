@@ -5,12 +5,9 @@ import { Tooltip } from "@nextui-org/tooltip";
 import React, { useEffect, useRef, useState } from "react";
 import { button as buttonStyles } from "@nextui-org/theme";
 import EspressoResults from "./espressoResults";
-import { title } from "./primitives";
 import EspressoInput from "./espressoInput";
 import { Status } from "@/types/status";
 import { FaCoffee } from "react-icons/fa";
-import animation from '../app/lottie/beans.json'
-import Lottie from "react-lottie";
 import CoffeeMeter from "./coffeeMeter";
 
 interface Props { }
@@ -22,15 +19,6 @@ const EspressoMaker = (props: Props) => {
     const timerRef = useRef<NodeJS.Timeout>();
     const [coffeeResults, setCoffeeResults] = useState("");
     const [dose, setDose] = useState(0);
-
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animation,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
-        }
-    };
 
     const handleStop = () => {
         clearTimeout(timerRef.current);

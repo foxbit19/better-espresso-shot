@@ -2,10 +2,11 @@ import React, { ChangeEvent, useRef, useState } from "react";
 import { title } from "./primitives";
 import EspressoInput from "./espressoInput";
 import { Button } from "@nextui-org/button";
-import { FaSave } from "react-icons/fa";
+import { FaFlagCheckered, FaSave } from "react-icons/fa";
 import { button as buttonStyles } from "@nextui-org/theme";
 import RatioProvider from "@/app/providers/provider";
 import Tips from "./tips";
+import CoffeeSuggestion from "./coffeeSuggestion";
 
 interface Props {
     dose: number;
@@ -45,25 +46,22 @@ const EspressoResults = (props: Props) => {
                         <Tips text='Add your cup output' />
                     </div>
                     <EspressoInput label="Your output" value={output.current.toString()} onChange={handleOutputChange} />
+                    <Button
+                        onClick={handleSave}
+                        //disabled={saved}
+                        className={buttonStyles({
+                            color: "primary",
+                            radius: "md",
+                            size: "lg",
+                        })}
+                        startContent={<FaFlagCheckered size={25} />}
+                    >View results</Button>
                 </div>
             ) : (
                 <></>
             )}
-            <h1 className={`${title()} py-10`}>
-                Your ratio is
-                <br />
-                <span className={title({ color: "yellow" })}>{ratio}</span>
-            </h1>
-            <Button
-                onClick={handleSave}
-                disabled={saved}
-                className={buttonStyles({
-                    color: "primary",
-                    radius: "md",
-                    size: "lg",
-                })}
-                startContent={<FaSave size={25} />}
-            >Save</Button>
+            {saved ? <CoffeeSuggestion input={props.dose} output={output.current} seconds={props.seconds} /> : <></>}
+
         </div>
     );
 };

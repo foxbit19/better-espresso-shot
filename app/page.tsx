@@ -22,7 +22,7 @@ export default function Home() {
 			<Lottie options={defaultOptions}
 				height={300}
 				width={300} />
-			<div className="inline-block max-w-lg text-center justify-center">
+			<div className="inline-block  text-center justify-center">
 				<h1 className={title()}>Improve your&nbsp;</h1>
 				<br />
 				<h1 className={title({ color: "foreground" })}>
@@ -34,7 +34,7 @@ export default function Home() {
 				</h1>
 			</div>
 
-			<div className="flex flex-col gap-5 py-10">
+			<div className="flex flex-col gap-5 py-10 max-w-lg">
 				<EspressoMaker />
 				<OldData />
 				<ShareBar />
