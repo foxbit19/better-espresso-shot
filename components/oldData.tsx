@@ -75,7 +75,7 @@ const OldData = (props: {}) => {
 
     return (
         <div className={rows.length > 0 ? '' : 'hidden'}>
-            <Tips text="Your old data" left />
+            <Tips text="Your last 5 extractions" left />
             <Table isStriped>
                 <TableHeader columns={columns}>
                     {(column) => (

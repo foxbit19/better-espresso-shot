@@ -16,8 +16,7 @@ export default class RatioProvider {
 
     public getAll(): RatioResult[] {
         if (typeof window !== "undefined") {
-            const ratios: RatioResult[] = JSON.parse(localStorage.getItem(this.storageName)!) ?? [];
-            return ratios.sort((ratioA, ratioB) => ratioA.date > ratioB.date ? 0 : 1)
+            return JSON.parse(localStorage.getItem(this.storageName)!) ?? [];
         } else {
             return [];
         }
@@ -25,8 +24,9 @@ export default class RatioProvider {
 
     public add(ratio: RatioResult) {
         const ratios = this.getAll();
+        ratios.splice(4)
         ratios.push(ratio);
-        this.save(ratios);
+        this.save(ratios.sort((ratioA, ratioB) => ratioA.date > ratioB.date ? 0 : 1));
     }
 
     public delete(id: string) {
