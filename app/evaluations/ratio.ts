@@ -11,3 +11,8 @@ export function ratioEvaluation(ratio: number) {
 
     return evaluation;
 }
+
+export function findRatio(input: number, output: number): number {
+    const currentRatio = (1 / input) * output;
+    return Math.round(currentRatio * 100) / 100
+}
