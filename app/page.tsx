@@ -3,23 +3,15 @@
 import { title } from "@/components/primitives";
 import EspressoMaker from "@/components/espressoMaker";
 import Lottie from 'react-lottie';
-import animation from './lottie/espresso.json'
+import espressoLottie from './lottie/espresso.json'
+import options from '../config/lottie'
 import OldData from "@/components/oldData";
 import ShareBar from "@/components/shareBar";
 
 export default function Home() {
-	const defaultOptions = {
-		loop: true,
-		autoplay: true,
-		animationData: animation,
-		rendererSettings: {
-			preserveAspectRatio: 'xMidYMid slice'
-		}
-	};
-
 	return (
 		<section className="flex flex-col items-center justify-center gap-5 md:py-1">
-			<Lottie options={defaultOptions}
+			<Lottie options={{ ...options, animationData: espressoLottie }}
 				height={300}
 				width={300} />
 			<div className="inline-block  text-center justify-center">
