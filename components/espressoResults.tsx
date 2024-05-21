@@ -41,10 +41,8 @@ const EspressoResults = (props: Props) => {
     return (
         <div className="flex flex-col gap-3 text-center">
             {props.results.length > 0 ? (
-                <div className="flex flex-col gap-4">
-                    <div className="flex flex-row gap-3 justify-end">
-                        <Tips text="Add your cup output" />
-                    </div>
+                <div className="flex flex-col gap-2">
+                    <Tips text="Add your cup output" />
                     <EspressoInput
                         label="Your output"
                         value={output.current.toString()}

@@ -16,7 +16,7 @@ const EspressoInput = (props: Props) => {
 
     return (
         <Input
-            className='flex-1'
+            className='flex-1 mb-5'
             value={props.value}
             label={props.label}
             onChange={props.onChange}
