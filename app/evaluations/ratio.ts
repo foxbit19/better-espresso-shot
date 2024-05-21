@@ -1,15 +1,15 @@
-import { Result } from "@/types/result";
+import { CoffeeType } from "@/types/coffeeType";
 
-export function ratioEvaluation(ratio: number): Result {
+export function ratioEvaluation(ratio: number): CoffeeType {
     let evaluation = '';
-    let result: Result;
+    let result: CoffeeType;
 
-    if (ratio < 2) {
-        result = Result.OVER_EXTRACTED;
-    } else if (ratio >= 2.5) {
-        result = Result.UNDER_EXTRACTED;
+    if (ratio <= 1.5) {
+        result = CoffeeType.RISTRETTO;
+    } else if (ratio > 3) {
+        result = CoffeeType.LUNGO;
     } else {
-        result = Result.PERFECT
+        result = CoffeeType.ESPRESSO
     }
 
     return result;
