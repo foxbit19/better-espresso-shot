@@ -8,17 +8,13 @@ interface Props {
 
 const CoffeeMeter = (props: Props) => {
     const [indicatorColor, setIndicatorColor] = useState<string>('stroke-coffee-over-under-extracted')
-    const [coffeeType, setCoffeeType] = useState<string>('over extracted')
 
     const handleCoffeeType = () => {
         if (props.seconds < 20) {
-            setCoffeeType('over extracted')
             setIndicatorColor('stroke-coffee-over-extracted')
         } else if (props.seconds > 30) {
-            setCoffeeType('under extracted')
             setIndicatorColor('stroke-coffee-under-extracted')
         } else {
-            setCoffeeType('espresso')
             setIndicatorColor('stroke-coffee-espresso')
         }
     }
@@ -41,7 +37,6 @@ const CoffeeMeter = (props: Props) => {
                 showValueLabel={true}
                 formatOptions={{ style: "decimal" }}
                 strokeWidth={4}
-                label={<b>Making {coffeeType}...</b>}
             />
         </div>
     )
