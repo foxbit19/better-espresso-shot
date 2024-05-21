@@ -1,15 +1,18 @@
-export function ratioEvaluation(ratio: number) {
+import { Result } from "@/types/result";
+
+export function ratioEvaluation(ratio: number): Result {
     let evaluation = '';
+    let result: Result;
 
     if (ratio < 2) {
-        evaluation = 'It seems that your espresso is over-extracted. Try to grind coarser or increment your output in the cup.'
+        result = Result.OVER_EXTRACTED;
     } else if (ratio >= 2.5) {
-        evaluation = 'It seems that your espresso is under-extracted. Try to grind finer or decrement your output in the cup.'
+        result = Result.UNDER_EXTRACTED;
     } else {
-        evaluation = 'Your espresso is perfect! No need other improvements by a ratio prospective.'
+        result = Result.PERFECT
     }
 
-    return evaluation;
+    return result;
 }
 
 export function findRatio(input: number, output: number): number {
