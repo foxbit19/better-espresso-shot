@@ -50,8 +50,7 @@ export default function RootLayout({
 							<Link
 								isExternal
 								className="flex items-center gap-1 text-current"
-								href="https://github.com/foxbit19"
-								title="foxbit19's github profile"
+								href="https://x.com/foxbit19"
 							>
 								Made by
 								<p className="text-primary">foxbit19</p>
