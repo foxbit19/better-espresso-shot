@@ -53,7 +53,7 @@ const CoffeeSuggestion = (props: Props) => {
                     You&apos;ve made a <b>{getDescription()}</b> with a ratio of {ratio}.
                 </small>
                 <small>
-                    Ristretto: <b>1:1 - 1:15</b> | Espresso: <b>1:15 - 1:3</b> | Lungo: <b>1:3 - 1:6</b>
+                    Ristretto: <b>1:1 - 1:1.5</b> | Espresso: <b>1:1.5 - 1:3</b> | Lungo: <b>1:3 - 1:6</b>
                 </small>
             </CardFooter>
         </Card>
