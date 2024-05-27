@@ -4,7 +4,6 @@ import { Button } from "@nextui-org/button";
 import React, { useEffect, useRef, useState } from "react";
 import { button as buttonStyles } from "@nextui-org/theme";
 import EspressoResults from "./espressoResults";
-import EspressoInput from "./espressoInput";
 import { Status } from "@/types/status";
 import { FaCoffee } from "react-icons/fa";
 import CoffeeMeter from "./coffeeMeter";
