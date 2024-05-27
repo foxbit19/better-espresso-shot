@@ -10,6 +10,7 @@ import CoffeeMeter from "./coffeeMeter";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { Input } from "@nextui-org/input";
 import { round } from "@/app/evaluations/ratio";
+import Tips from "./tips";
 
 interface Props { }
 
@@ -60,7 +61,8 @@ const EspressoMaker = (props: Props) => {
     return (
         <div className="flex flex-col gap-4">
             {pullStatus !== Status.PULLING ? (
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-1">
+                    <Tips text="Click this button to start the coffee timer" />
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-row gap-3 align-middle justify-center">
                         <Input
                             label="Your dose"
