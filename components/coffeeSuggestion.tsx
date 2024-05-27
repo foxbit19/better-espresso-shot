@@ -46,7 +46,7 @@ const CoffeeSuggestion = (props: Props) => {
                 <h4 className="font-bold text-large">{getDescription()}</h4>
             </CardHeader>
             <CardBody className="overflow-visible py-2">
-                <Lottie options={{ ...options, animationData: resultLottie }} width={200} height={200} />
+                <Lottie options={{ ...options, loop: false, animationData: resultLottie }} width={200} height={200} />
             </CardBody>
             <CardFooter className="flex flex-col gap-5 max-w-md text-default-500">
                 <small>
