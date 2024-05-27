@@ -1,13 +1,13 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-import { title } from "./primitives";
-import EspressoInput from "./espressoInput";
+import React, { useRef, useState } from "react";
 import { Button } from "@nextui-org/button";
-import { FaFlagCheckered, FaSave } from "react-icons/fa";
+import { FaFlagCheckered } from "react-icons/fa";
 import { button as buttonStyles } from "@nextui-org/theme";
 import RatioProvider from "@/app/providers/provider";
 import Tips from "./tips";
 import CoffeeSuggestion from "./coffeeSuggestion";
-import { findRatio } from "@/app/evaluations/ratio";
+import { findRatio, round } from "@/app/evaluations/ratio";
+import { Input } from "@nextui-org/input";
+import { useForm, SubmitHandler } from "react-hook-form"
 
 interface Props {
     dose: number;
@@ -18,38 +18,50 @@ interface Props {
 const EspressoResults = (props: Props) => {
     const [ratio, setRatio] = useState("1:1");
     const [saved, setSaved] = useState(false);
-    const output = useRef<number>(0);
+    const [outputDose, setOutputDose] = useState(0)
 
-    const handleOutputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        output.current = +event.currentTarget.value;
-        setRatio(`1:${findRatio(props.dose, output.current)}`);
-    };
+    const handleSave = (output: number) => {
+        const currentRatio = `1:${findRatio(props.dose, output)}`;
+        setOutputDose(output);
+        setRatio(currentRatio);
 
-    const handleSave = () => {
         new RatioProvider().add({
             id: crypto.randomUUID(),
             date: new Date(),
             input: props.dose,
-            output: output.current,
-            ratio: ratio,
+            output: output,
+            ratio: currentRatio,
             seconds: props.seconds,
         });
 
         setSaved(true);
     };
 
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<{ output: number }>()
+
     return (
         <div className="flex flex-col gap-3 text-center">
             {props.results.length > 0 ? (
-                <div className="flex flex-col gap-2">
+                <form onSubmit={handleSubmit((data: { output: number }) => handleSave(round(data.output)))} className="flex flex-col gap-2">
                     <Tips text="Add your cup output" />
-                    <EspressoInput
+                    <Input
                         label="Your output"
-                        value={output.current.toString()}
-                        onChange={handleOutputChange}
+                        type="number"
+                        {...register('output', { required: true, valueAsNumber: true })}
+                        isInvalid={!!errors.output}
+                        errorMessage={'Please insert a valid output in grams.'}
+                        endContent={
+                            <div className="pointer-events-none flex items-center">
+                                <span className="text-default-400 text-small">grams</span>
+                            </div>
+                        }
                     />
                     <Button
-                        onClick={handleSave}
+                        type="submit"
                         disabled={saved}
                         className={buttonStyles({
                             color: "primary",
@@ -60,7 +72,7 @@ const EspressoResults = (props: Props) => {
                     >
                         View results
                     </Button>
-                </div>
+                </form>
             ) : (
                 <></>
             )}
@@ -68,7 +80,7 @@ const EspressoResults = (props: Props) => {
             {saved ? (
                 <CoffeeSuggestion
                     input={props.dose}
-                    output={output.current}
+                    output={outputDose}
                     seconds={props.seconds}
                 />
             ) : (

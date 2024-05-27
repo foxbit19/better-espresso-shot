@@ -84,7 +84,7 @@ const OldData = (props: {}) => {
                 </TableHeader>
                 <TableBody items={rows}>
                     {(item) => (
-                        <TableRow key={1}>
+                        <TableRow key={item.id}>
                             {(columnKey) => (
                                 <TableCell>{handleCell(item, columnKey)}</TableCell>
                             )}

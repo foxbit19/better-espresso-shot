@@ -17,5 +17,9 @@ export function ratioEvaluation(ratio: number): CoffeeType {
 
 export function findRatio(input: number, output: number): number {
     const currentRatio = (1 / input) * output;
-    return Math.round(currentRatio * 100) / 100
+    return round(currentRatio)
+}
+
+export function round(input: number): number {
+    return Math.round(input * 100) / 100
 }

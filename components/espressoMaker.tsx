@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@nextui-org/button";
-import { Tooltip } from "@nextui-org/tooltip";
 import React, { useEffect, useRef, useState } from "react";
 import { button as buttonStyles } from "@nextui-org/theme";
 import EspressoResults from "./espressoResults";
@@ -9,6 +8,9 @@ import EspressoInput from "./espressoInput";
 import { Status } from "@/types/status";
 import { FaCoffee } from "react-icons/fa";
 import CoffeeMeter from "./coffeeMeter";
+import { useForm, SubmitHandler } from "react-hook-form"
+import { Input } from "@nextui-org/input";
+import { round } from "@/app/evaluations/ratio";
 
 interface Props { }
 
@@ -30,8 +32,9 @@ const EspressoMaker = (props: Props) => {
         );
     };
 
-    const handleStart = () => {
+    const handleStart = (input: number) => {
         setPullStatus(Status.PULLING);
+        setDose(input);
     };
 
     useEffect(() => {
@@ -46,18 +49,35 @@ const EspressoMaker = (props: Props) => {
         return () => clearInterval(timer);
     }, [pullStatus]);
 
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm<{ input: number }>()
+
+    const onSubmit: SubmitHandler<{ input: number }> = (data) => handleStart(round(data.input))
+
     return (
         <div className="flex flex-col gap-4">
             {pullStatus !== Status.PULLING ? (
-                <div className="flex flex-row gap-3 align-middle justify-center">
-                    <EspressoInput
-                        label="Your dose"
-                        value={dose.toString()}
-                        onChange={(event) => setDose(+event.currentTarget.value)}
-                    />
-                    <Tooltip content="Click this button to start the coffee timer">
+                <div className="flex flex-col">
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-row gap-3 align-middle justify-center">
+                        <Input
+                            label="Your dose"
+                            type="number"
+                            {...register('input', { required: true, valueAsNumber: true })}
+                            isInvalid={!!errors.input}
+                            errorMessage={'Please insert a valid dose in grams.'}
+                            endContent={
+                                <div className="pointer-events-none flex items-center">
+                                    <span className="text-default-400 text-small">grams</span>
+                                </div>
+                            }
+                        />
                         <Button
-                            onClick={handleStart}
+                            //onClick={handleStart}
+                            type="submit"
                             isIconOnly
                             className={`${buttonStyles({
                                 color: "primary",
@@ -66,8 +86,9 @@ const EspressoMaker = (props: Props) => {
                             })} h-14`}
                             startContent={<FaCoffee size={25} />}
                         ></Button>
-                    </Tooltip>
+                    </form>
                 </div>
+
             ) : (
                 <div className="flex flex-col align-middle text-center gap-4">
                     <CoffeeMeter seconds={counter} />
@@ -82,13 +103,16 @@ const EspressoMaker = (props: Props) => {
                         Stop
                     </Button>
                 </div>
-            )}
-            {pullStatus === Status.PULLED ? (
-                <EspressoResults dose={dose} results={coffeeResults} seconds={seconds} />
-            ) : (
-                <></>
-            )}
-        </div>
+            )
+            }
+            {
+                pullStatus === Status.PULLED ? (
+                    <EspressoResults dose={dose} results={coffeeResults} seconds={seconds} />
+                ) : (
+                    <></>
+                )
+            }
+        </div >
     );
 };
 
