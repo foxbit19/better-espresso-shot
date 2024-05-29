@@ -50,7 +50,7 @@ const CoffeeSuggestion = (props: Props) => {
             </CardBody>
             <CardFooter className="flex flex-col gap-5 max-w-md text-default-500">
                 <small>
-                    You&apos;ve made a <b>{getDescription()}</b> with a ratio of {ratio}.
+                    You made a <b>{getDescription()}</b> with a ratio of {ratio}.
                 </small>
                 <small>
                     Ristretto: <b>1:1 - 1:1.5</b> | Espresso: <b>1:1.5 - 1:3</b> | Lungo: <b>1:3 - 1:6</b>
